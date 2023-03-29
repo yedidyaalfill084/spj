@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SpjController;
-
+use App\Http\Controllers\ControllersFileUpload;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,4 +19,10 @@ Route::get('/', function () {
 });
 
 Route::resource('spj', SpjController::class);
+Route::resource('posts', App\Http\Controllers\ControllersFileUpload::class);
+
+Route::get('/pdf/{filename}', function ($filename) {
+    $path = storage_path('app/public/' . $filename);
+    return response()->file($path);
+});
 
